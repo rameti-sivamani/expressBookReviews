@@ -26,6 +26,22 @@ public_users.post("/register", (req, res) => {
   return res.status(400).json({ message: "Unable to register user. Username and/or password not provided." });
 
 });
+public_users.post('/customer/login', (req, res) => {
+
+  if (username && password) {
+    if (doesExist(username)) {
+      if (users.username === username && users.password === password)
+        return res.send("The user is successfully logged in...");
+    }
+    else {
+      return res.status(300).json({ message: "The user is not registered" })
+
+    }
+  }
+  else {
+    return res.status(404).json({ message: "Enter the valid credentials" })
+  }
+});
 
 // Get the book list available in the shop
 public_users.get('/', function (req, res) {
